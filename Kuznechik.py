@@ -149,7 +149,7 @@ def decrypt(file_path):
                         block_data = block_data[:last_unit]
 
                         with open('decrypted.txt', 'ab') as out:
-                            num_bytes = len(block_data) // 8 + 1
+                            num_bytes = len(block_data) // 8
                             out.write(int(block_data, 2).to_bytes(num_bytes, 'big'))
 
                     else:
