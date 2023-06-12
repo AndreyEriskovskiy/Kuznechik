@@ -90,12 +90,8 @@ def encrypt(file_path):
                 block_data = f.read(file_size % 16)
 
                 block_data = bin(int.from_bytes(block_data, 'big'))[2:].zfill((file_size % 16) * 8)
-
-                length = len(block_data)
-
+                
                 block_data += '1' + '0' * (127 - len(block_data))
-
-                length = len(block_data)
 
                 block_data = int(block_data, 2)
 
