@@ -43,7 +43,6 @@ def key_deploy():
             K += hex(byte[0])[2:].zfill(2)
             byte = f.read(1)
 
-    print(K)
 
     k1, k2 = K[:32], K[32:]
     keys = []
@@ -90,9 +89,13 @@ def encrypt(file_path):
 
                 block_data = f.read(file_size % 16)
 
-                block_data = bin(int.from_bytes(block_data, 'big'))[2:]
+                block_data = bin(int.from_bytes(block_data, 'big'))[2:].zfill((file_size % 16) * 8)
+
+                length = len(block_data)
 
                 block_data += '1' + '0' * (127 - len(block_data))
+
+                length = len(block_data)
 
                 block_data = int(block_data, 2)
 
@@ -118,7 +121,6 @@ def encrypt(file_path):
 
 def decrypt(file_path):
     keys = key_deploy()
-
     f = open('decrypted.txt', 'wb')
     f.close()
     count_read_blocks = 0
@@ -148,9 +150,9 @@ def decrypt(file_path):
                         last_unit = block_data.rfind('1')
                         block_data = block_data[:last_unit]
 
+
                         with open('decrypted.txt', 'ab') as out:
-                            num_bytes = len(block_data) // 8 + 1
-                            out.write(int(block_data, 2).to_bytes(num_bytes, 'big'))
+                            out.write(int(block_data, 2).to_bytes(len(block_data) // 8, 'big'))
 
                     else:
                         with open('decrypted.txt', 'ab') as out:
