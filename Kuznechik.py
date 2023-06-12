@@ -152,7 +152,12 @@ def decrypt(file_path):
 
 
                         with open('decrypted.txt', 'ab') as out:
+<<<<<<< HEAD
                             out.write(int(block_data, 2).to_bytes(len(block_data) // 8, 'big'))
+=======
+                            num_bytes = len(block_data) // 8
+                            out.write(int(block_data, 2).to_bytes(num_bytes, 'big'))
+>>>>>>> 903c0ff980acfddd950b768bdc367250172f1f30
 
                     else:
                         with open('decrypted.txt', 'ab') as out:
