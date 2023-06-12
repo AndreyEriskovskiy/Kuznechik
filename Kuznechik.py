@@ -155,9 +155,7 @@ def decrypt(file_path):
 
                             out.write(int(block_data, 2).to_bytes(len(block_data) // 8, 'big'))
 
-                            num_bytes = len(block_data) // 8
-                            out.write(int(block_data, 2).to_bytes(num_bytes, 'big'))
-
+                        
 
                     else:
                         with open('decrypted.txt', 'ab') as out:
